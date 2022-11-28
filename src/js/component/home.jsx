@@ -1,24 +1,46 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
-
-//create your first component
 const Home = () => {
+	const [tarea, nueva] = useState([]);
+
+function putapi () {
+	var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify(tarea);
+
+var requestOptions = {
+  method: 'PUT',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("http://assets.breatheco.de/apis/fake/todos/user/claudia", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+}
+
+	useEffect(()=>{
+		fetch("http://assets.breatheco.de/apis/fake/todos/user/claudia")
+		.then((respuesta) => respuesta.json())
+		.then((data) => nueva(data));
+	}, [])
+	
 	return (
 		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+			<h1 className="text-center mt-5">Todo List!</h1>
+			<form onSubmit={(evento)=>{
+				evento.preventDefault()
+nueva([...tarea, {label:evento.target[0].value, done:false}]);			
+			}}>
+				<input type="text" placeholder="agregar" ></input>
+			</form>
+			{tarea.map((elm,index)=>{
+				return<li key={index}>{elm.label}</li>
+			})}	
+			<p>Faltan {tarea.length} para terminar</p>	
 		</div>
 	);
 };
