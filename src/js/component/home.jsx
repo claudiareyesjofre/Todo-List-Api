@@ -3,7 +3,7 @@ import React,{useState,useEffect} from "react";
 const Home = () => {
 	const [tarea, nueva] = useState([]);
 
-function putapi () {
+function api ()  {
 	var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 
@@ -21,12 +21,15 @@ fetch("http://assets.breatheco.de/apis/fake/todos/user/claudia", requestOptions)
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
 }
-
 	useEffect(()=>{
-		fetch("http://assets.breatheco.de/apis/fake/todos/user/claudia")
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/claudia")
 		.then((respuesta) => respuesta.json())
 		.then((data) => nueva(data));
-	}, [])
+	}, []);
+	
+	useEffect(()=>{
+		api();
+	},[tarea]);
 	
 	return (
 		<div className="text-center">
@@ -34,6 +37,7 @@ fetch("http://assets.breatheco.de/apis/fake/todos/user/claudia", requestOptions)
 			<form onSubmit={(evento)=>{
 				evento.preventDefault()
 nueva([...tarea, {label:evento.target[0].value, done:false}]);			
+			
 			}}>
 				<input type="text" placeholder="agregar" ></input>
 			</form>
