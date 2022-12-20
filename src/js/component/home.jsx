@@ -16,37 +16,54 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("http://assets.breatheco.de/apis/fake/todos/user/claudia", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+fetch(
+	"http://assets.breatheco.de/apis/fake/todos/user/claudia", 
+	requestOptions)
+  .then((response) => response.text())
+  .then((result) => console.log(result))
+  .catch((error) => console.log('error', error));
 }
 	useEffect(()=>{
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/claudia")
-		.then((respuesta) => respuesta.json())
+		.then((response) => response.json())
 		.then((data) => nueva(data));
 	}, []);
 	
 	useEffect(()=>{
 		api();
 	},[tarea]);
-	
+
+
+
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Todo List!</h1>
-			<form onSubmit={(evento)=>{
-				evento.preventDefault()
-nueva([...tarea, {label:evento.target[0].value, done:false}]);			
-			
-			}}>
-				<input type="text" placeholder="agregar" ></input>
-			</form>
-			{tarea.map((elm,index)=>{
-				return<li key={index}>{elm.label}</li>
-			})}	
-			<p>Faltan {tarea.length} para terminar</p>	
-		</div>
+		<div className="container">
+			<h1>Lista de Tareas</h1>
+			<ul>
+				<li>
+					<input
+					 placeholder="ingresa"
+					onKeyPress={(event) => {
+						if(event.key === "Enter") {
+							nueva([...tarea, {label: event.target.value,done: false}]);
+							event.target.value ="";
+						}
+					}} />
+				</li>
+				{tarea.map((value, index) => {
+					return(
+						<li key={index}>
+							{value.label} <i className="fas fa-times float-end my-1 mx-1"
+							onClick={() => nueva(tarea.filter((value,i)=> index != i))
+							}
+							></i>
+						</li>
+					);
+				})}
+				<div className="left"> {tarea.length} Item Left</div>
+			</ul>
+	</div>
 	);
-};
+}; 
+
 
 export default Home;

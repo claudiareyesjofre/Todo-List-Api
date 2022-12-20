@@ -10,3 +10,44 @@
     import 'relative/path/to/stylesheet.scss';
 
 */
+body{
+    margin-top: 50px;
+    font-family: Garamond;
+}
+fa-times:before{
+    margin-right: 20px;
+}
+
+.container{
+    width: 30%;
+    background: #3ac0ae;
+}
+ul{
+    padding: 0%;
+    
+    
+}
+ul li{
+    border: 3px solid #fff;
+   
+    list-style: none;
+    padding: 5px;
+    color: #fff;
+}
+h1 {
+    text-align: center;
+    color: #fff;
+    text-shadow: black;
+}
+input{
+    border: none;
+    width: 100%;
+    background-color: rgb(48, 135, 175);
+    opacity:0.2;
+
+}
+
+div.left{
+    color: #fff;
+    text-shadow: black;
+}
