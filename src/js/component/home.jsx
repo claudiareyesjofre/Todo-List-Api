@@ -54,7 +54,7 @@ fetch(
         }}
       >
         
-        <input type="text" placeholder="¿cual es tu tarea?"></input>
+        <input type="text" placeholder="ingresa"></input>
         <button> Ingresar </button>
       </form>
       {tarea.map((value, index) => {
