@@ -22,17 +22,15 @@ fa-times:before{
     width: 30%;
     background: #3ac0ae;
 }
-ul{
-    padding: 0%;
-    
-    
-}
-ul li{
+
+li{
     border: 3px solid #fff;
-   
     list-style: none;
     padding: 5px;
     color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 h1 {
     text-align: center;
@@ -51,3 +49,21 @@ div.left{
     color: #fff;
     text-shadow: black;
 }
+
+
+
+  input[type="text"] {
+    width: 70%;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 1px solid gray;
+  }
+
+  button {
+    width: 20%;
+    padding: 0.5em;
+    border-radius: 5px;
+    background-color: rgb(133, 188, 176);
+    color: white;
+    border: none;
+  }

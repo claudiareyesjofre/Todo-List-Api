@@ -2,6 +2,13 @@ import React,{useState,useEffect} from "react";
 
 const Home = () => {
 	const [tarea, nueva] = useState([]);
+	const borrar = (b) => {
+		nueva(tarea.filter((value, index, arr) => {
+			return index != b;
+		  })
+		);
+	  };
+	
 
 function api ()  {
 	var myHeaders = new Headers();
@@ -38,29 +45,28 @@ fetch(
 	return (
 		<div className="container">
 			<h1>Lista de Tareas</h1>
-			<ul>
-				<li>
-					<input
-					 placeholder="ingresa"
-					onKeyPress={(event) => {
-						if(event.key === "Enter") {
-							nueva([...tarea, {label: event.target.value,done: false}]);
-							event.target.value ="";
-						}
-					}} />
-				</li>
-				{tarea.map((value, index) => {
-					return(
-						<li key={index}>
-							{value.label} <i className="fas fa-times float-end my-1 mx-1"
-							onClick={() => nueva(tarea.filter((value,i)=> index != i))
-							}
-							></i>
-						</li>
-					);
-				})}
-				<div className="left"> {tarea.length} Item Left</div>
-			</ul>
+			<form
+        onSubmit={(event) => {
+          event.preventDefault(); //que no se actualize el componente//
+          nueva([...tarea, { label: event.target[0].value, done: false }]);
+          putApi();
+          event.target[0].value="";
+        }}
+      >
+        
+        <input type="text" placeholder="¿cual es tu tarea?"></input>
+        <button> Ingresar </button>
+      </form>
+      {tarea.map((value, index) => {
+        return (
+          <li key={index}>
+            {value.label}
+            <button onClick={() => borrar(index)}> X </button>
+          </li>
+        );
+      })}
+				<div className="left"> {tarea.length} te quedan tareas</div>
+	
 	</div>
 	);
 }; 
