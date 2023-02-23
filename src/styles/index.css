@@ -23,7 +23,7 @@ fa-times:before{
     background: #3ac0ae;
 }
 
-li{
+div.task-name{
     border: 3px solid #fff;
     list-style: none;
     padding: 5px;
@@ -31,6 +31,7 @@ li{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 500px;
 }
 h1 {
     text-align: center;
@@ -59,7 +60,7 @@ div.left{
     border: 1px solid gray;
   }
 
-  button {
+  button.delete-button{
     width: 20%;
     padding: 0.5em;
     border-radius: 5px;
